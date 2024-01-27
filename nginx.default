@@ -1,0 +1,19 @@
+server {
+	server_name ~^(?<subdomain>.+)\.diatrix\.space diatrix.space;
+
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	if ($subdomain = "") {
+		return 301 $scheme://home.diatrix.space;
+	}
+	if (!-d /var/www/diatrix/$subdomain) {
+		return 301 $scheme://sitemap.diatrix.space;
+	}
+
+	location / {
+		root /var/www/diatrix/$subdomain;
+		index index.html;
+		try_files $uri $uri/ $uri.html =404;
+	}
+}
