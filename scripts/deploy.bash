@@ -9,7 +9,7 @@ sudo mkdir -p /var/www/diatrix
 
 WWW=/var/www/diatrix
 for dir in src shared; do
-	mkdir -p ${WWW}/${dir}
+	sudo mkdir -p ${WWW}/${dir}
 	sudo rsync -avh --delete ./${dir}/ ${WWW}/${dir}
 done
 
